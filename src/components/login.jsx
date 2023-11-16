@@ -32,7 +32,7 @@ const Login = () => {
         if (loggenIn) {
             navigate('/');
         }
-    }, []);
+    }, [loggenIn]);
 
     return (
         <div className='text-center mt-5'>
