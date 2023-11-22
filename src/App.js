@@ -22,7 +22,7 @@ const App = () => {
     };
 
     const getArticles = async () => {
-        dispatch(getArticleStart);
+        dispatch(getArticleStart());
         try {
             const response = await ArticleService.getArticle();
             dispatch(getArticleSuccess(response.articles));

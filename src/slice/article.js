@@ -15,12 +15,13 @@ export const articleSlice = createSlice({
         },
 
         getArticleSuccess: (state, action) => {
-            state.isLoading = true;
+            state.isLoading = false;
             state.articles = action.payload;
         },
 
         getArticleFailure: (state, action) => {
             state.error = action.payload;
+            state.isLoading = false;
         },
     },
 });
