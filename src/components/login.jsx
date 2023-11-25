@@ -60,10 +60,10 @@ const Login = () => {
                         type={'password'}
                     />
                     <button
-                        className='btn btn-primary w-100 py-2 mt-2'
+                        className='w-100 btn btn-lg btn-primary mt-2'
+                        disabled={isLoading}
                         onClick={loginHandler}
                         type='submit'
-                        disabled={isLoading}
                     >
                         {isLoading ? 'loading...' : 'Login'}
                     </button>

@@ -28,23 +28,11 @@ const App = () => {
         }
     };
 
-    const getArticles = async () => {
-        dispatch(getArticleStart());
-        try {
-            const response = await ArticleService.getArticle();
-            dispatch(getArticleSuccess(response.articles));
-            console.log(response);
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
     useEffect(() => {
         const token = getItem('token');
         if (token) {
             getUser();
         }
-        getArticles();
     }, []);
 
     return (
