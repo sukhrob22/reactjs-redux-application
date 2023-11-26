@@ -7,6 +7,7 @@ import ArticleService from '../service/article';
 
 const Main = () => {
     const { articles, isLoading } = useSelector((state) => state.article);
+    const { loggenIn, user } = useSelector((state) => state.auth);
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -16,6 +17,15 @@ const Main = () => {
             const response = await ArticleService.getArticle();
             dispatch(getArticleSuccess(response.articles));
             console.log(response);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const deleteArticle = async (slug) => {
+        try {
+            await ArticleService.deletArticle(slug);
+            getArticles();
         } catch (error) {
             console.log(error);
         }
@@ -71,18 +81,29 @@ const Main = () => {
                                         >
                                             View
                                         </button>
-                                        <button
-                                            type='button'
-                                            className='btn btn-sm btn-outline-secondary'
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            type='button'
-                                            className='btn btn-sm btn-outline-danger'
-                                        >
-                                            Delete
-                                        </button>
+                                        {loggenIn &&
+                                            user.username ===
+                                                item.author.username && (
+                                                <>
+                                                    <button
+                                                        type='button'
+                                                        className='btn btn-sm btn-outline-secondary'
+                                                    >
+                                                        Edit
+                                                    </button>
+                                                    <button
+                                                        type='button'
+                                                        className='btn btn-sm btn-outline-danger'
+                                                        onClick={() =>
+                                                            deleteArticle(
+                                                                item.slug
+                                                            )
+                                                        }
+                                                    >
+                                                        Delete
+                                                    </button>
+                                                </>
+                                            )}
                                     </div>
                                     <small className='text-body-secondary fw-bold text-capitalize'>
                                         {item.author.username}
